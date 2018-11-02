@@ -88,6 +88,7 @@ Set this will just change the map that corresponds with `PasteOutputLine` aliase
 ## TODO
 
 - Do paste output of all current script
+- Integration with tmux
 
 ## Self-Promotion
 
