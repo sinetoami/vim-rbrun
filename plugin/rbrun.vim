@@ -5,7 +5,6 @@
 " License:     Distributed under the terms of the Vim license.
 " Description: A simple plugin to run Ruby code in Vim
 " =============================================================================
-
 if exists("g:loaded_rbrun")
   finish
 endif
@@ -18,19 +17,28 @@ if !exists("g:rbrun_enable_mappings")
   let g:rbrun_enable_mappings = 1
 endif
 
+function! s:rbrun_cmd(command)
+  if !exists('*VimuxRunCommand')
+    echo system(a:command)
+  else
+    call VimuxRunCommand(a:command)
+    sleep 300m " take time if Vimux is running
+  endif
+endfunction
+
 function! s:rbrun_script()
-  echo system("ruby -w " . expand('%p:t'))
+  return s:rbrun_cmd("ruby -w " . expand('%p:t'))
 endfunction
 
 function! s:rbrun_line()
   let line = getline(line('.'))
-  echo system("ruby -e \"" . line . "\"")
+  return s:rbrun_cmd("ruby -e \"" . line . "\"")
 endfunction
 
 function! s:rbrun_codeblock() range
   let file = tempname()
   silent execute ":'<,'>w " . file
-  echo system("ruby -w " . file)
+  call s:rbrun_cmd("ruby -w " . file)
   silent execute "!rm -rf " . file
 endfunction
 

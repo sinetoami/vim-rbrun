@@ -12,6 +12,8 @@ A simple plugin to make run Ruby code on Vim. Inspired by [vim-ruby-run](https:/
   - **Paste the output** on current file:
     - Just one line under the cursor
     - Or piece of a selected code block
+  - Integration with [vimux](https://github.com/benmills/vimux)
+    - This feature requires to install [vimux](https://github.com/benmills/vimux)
 
   > Work in progress (see [TODO](#TODO)).
 
@@ -98,6 +100,4 @@ Do you like this plugin? Come on:
   - [GitHub](https://github.com/sinetoami)
 
 ## License
-
-Distributed under the terms of the Vim license.
-See `:help license`.
+[MIT License](LICENSE)
