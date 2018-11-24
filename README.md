@@ -15,7 +15,8 @@ A simple plugin to make run Ruby code on Vim. Inspired by [vim-ruby-run](https:/
   - Integration with [vimux](https://github.com/benmills/vimux)
     - This feature requires to install [vimux](https://github.com/benmills/vimux)
 
-  > Work in progress (see [TODO](#TODO)).
+
+> Work in progress (see [TODO](#TODO)).
 
 ## Instalation
 
@@ -90,7 +91,6 @@ Set this will just change the map that corresponds with `PasteOutputLine` aliase
 ## TODO
 
 - Do paste output of all current script
-- Integration with tmux
 
 ## Self-Promotion
 
