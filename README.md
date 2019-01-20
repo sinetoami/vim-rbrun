@@ -48,6 +48,14 @@ This section will contain a brief documentation.
 
 ### Configuration
 
+#### g:rbrun_strategy
+`let g:rbrun_strategy = "vimux"`
+
+There are two defined values for this variable: `vimux` and `basic`. The `vimux` value will
+force the command to run on a `tmux` pane using `VimuxRunCommand` function provided by the
+[vimux](https://bit.ly/2MkBJCD) plugin. The `basic` is enabled by default and run the command
+with `:!` on Neovim.
+
 #### g:rbrun_enable_mappings
 
 `let g:rbrun_enable_mappings = 0`

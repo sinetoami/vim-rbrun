@@ -13,16 +13,21 @@ let g:loaded_rbrun = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
+if !exists("g:rbrun_strategy")
+  let g:rbrun_strategy = "basic"
+endif
+
 if !exists("g:rbrun_enable_mappings")
   let g:rbrun_enable_mappings = 1
 endif
 
 function! s:rbrun_cmd(command)
-  if !exists('*VimuxRunCommand')
+  if g:rbrun_strategy == "basic"
     echo system(a:command)
-  else
+  elseif g:rbrun_strategy == "vimux" && exists('*VimuxRunCommand')
+    call VimuxRunCommand("clear")
     call VimuxRunCommand(a:command)
-    sleep 300m " take time if Vimux is running
+    sleep 1300m " take time if Vimux is running
   endif
 endfunction
 
@@ -30,9 +35,15 @@ function! s:rbrun_script()
   return s:rbrun_cmd("ruby -w " . expand('%p:t'))
 endfunction
 
+" ISSUE: When use 'vimux' strategy the last character of the string line is repeated, ex:
+" In the line: ruby -e "(1..10).each { |num| puts num * 2 }";
+" the --> }" <-- is repeated.
+" And the output will been like: ruby -e "(1..10).each { |num| puts num * 2 }" }".
+" I don't know why yet... find a workaround.
 function! s:rbrun_line()
-  let line = getline(line('.'))
-  return s:rbrun_cmd("ruby -e \"" . line . "\"")
+  let getline = getline(line('.'))
+  let line_around_quotes = "\"" . getline . "\""
+  return s:rbrun_cmd("ruby -e " . line_around_quotes)
 endfunction
 
 function! s:rbrun_codeblock() range
